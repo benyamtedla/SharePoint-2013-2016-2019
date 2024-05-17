@@ -1,0 +1,127 @@
+Example-1: Retrieve all List templates
+
+Try{
+Add-Type -Path 'E:\Program Files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll'
+Add-Type -Path 'E:\Program Files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.Runtime.dll'
+}
+catch {
+}
+
+function get-SPOListTemplates
+{
+$strSiteURL = "https://onlysharepoint2013.sharepoint.com/sites/sharepointsky/"
+$strUsrName = "bijay@onlysharepoint2013.onmicrosoft.com"
+
+$strPWD = Read-Host "Enter Password" -AsSecureString
+
+# set SharePoint Online credentials
+$SPOCredentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($strUsrName, $strPWD)
+
+# Creating client context for the provided user name and password
+$objContext = New-Object Microsoft.SharePoint.Client.ClientContext($strSiteURL)
+$objContext.credentials = $SPOCredentials
+$LstTempColl = $objContext.web.listtemplates
+$objContext.load($LstTempColl)
+
+#Sending the request to pull all the list templates
+try{
+$objContext.executeQuery()
+}
+catch{
+write-host "info: $($_.Exception.Message)" -foregroundcolor red
+}
+
+$LstTempColl | select baseType, ListTemplateTypeKind
+}
+get-SPOListTemplates
+
+
+==========================================
+Example-2: Retrieve all users in SharePoint Online
+
+
+Try{
+Add-Type -Path 'E:\Program Files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll'
+Add-Type -Path 'E:\Program Files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.Runtime.dll'
+}
+catch {
+}
+
+$strSiteURL = "https://onlysharepoint2013.sharepoint.com/sites/sharepointsky/"
+$strUsrName = "bijay@onlysharepoint2013.onmicrosoft.com"
+$strPWD = Read-Host "Enter Password" -AsSecureString
+# set SharePoint Online credentials
+$SPOCredentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($strUsrName, $strPWD)
+
+# Creating client context for the provided user name and password
+$objContext = New-Object Microsoft.SharePoint.Client.ClientContext($strSiteURL)
+$objContext.credentials = $SPOCredentials
+$web = $objContext.Web
+$siteUsers = $web.SiteUsers
+$objContext.load($siteUsers);
+$objContext.executeQuery()
+Write-Host "Site Collection URL:" , $strSiteURL
+foreach($user in $siteUsers)
+{
+if($user.IsSiteAdmin -eq $true)
+{
+Write-Host "User Name: ", $user.LoginName , "Role: Admin"
+}
+else
+{
+Write-Host "User Name: ", $user.LoginName, "Role: User"
+}
+}
+
+
+=====================
+Example-3: Insert items in bulk from Excel to SharePoint Online List
+
+
+Try{
+Add-Type -Path 'E:\Program Files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.dll'
+Add-Type -Path 'E:\Program Files\Common Files\microsoft shared\Web Server Extensions\16\ISAPI\Microsoft.SharePoint.Client.Runtime.dll'
+}
+catch {
+}
+
+$siteURL = "https://onlysharepoint2013.sharepoint.com/sites/SharePointSky/"
+$Listname="Employees"
+$userName = "bijay@onlysharepoint2013.onmicrosoft.com"
+$PlainPassword = “Password”
+$ImportFile ="E:\FilesToUpload\Employees.csv"
+$password = Read-Host "Enter Password" -AsSecureString
+# set SharePoint Online credentials
+$SPOCredentials = New-Object Microsoft.SharePoint.Client.SharePointOnlineCredentials($userName, $password)
+#Creating client context object
+$clientContext = New-Object Microsoft.SharePoint.Client.ClientContext($siteURL)
+$clientContext.credentials = $SPOCredentials
+$web = $clientContext.Web
+$clientContext.load($web)
+#Get the List
+$List = $clientContext.Web.Lists.GetByTitle($Listname)
+$clientContext.Load($List)
+$clientContext.executeQuery()
+$csv = Import-CSV $ImportFile
+foreach($row in $csv)
+{
+#Creat single list Items
+$ListItenCreationInformation =New-Object Microsoft.SharePoint.Client.ListItemCreationInformation
+$NewListItem = $List.AddItem($ListItenCreationInformation)
+$NewListItem["Title"] = $row.Title
+$NewListItem["EmailID"] = $row.EmailID
+$NewListItem.Update()
+$ClientContext.ExecuteQuery()
+}
+
+Write-Host "Items Added to List Sucessfully"
+
+
+
+
+
+
+
+
+
+
