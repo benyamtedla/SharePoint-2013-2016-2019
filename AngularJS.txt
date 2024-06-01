@@ -1,0 +1,154 @@
+Example-1: Display List Items
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+
+<div ng-app="listApp">
+<div id="App1" ng-controller="controller1">
+<h1>Team Announcements</h1>
+<ul>
+<div ng-repeat="item in items">
+<p><li>{{item.Title}}</li></p>
+</div>
+</ul>
+</div>
+
+<script>
+
+var appVar = angular.module('listApp', []);
+appVar.controller("controller1", function($scope){
+GetListItems($scope, "Training%20Announcements");
+});
+
+function GetListItems($scope, listName){
+$.ajax({
+url: "https://sharepointskytraining.sharepoint.com/sites/TSInfo/_api/web/lists/GetByTitle('"+listName+"')/items",
+method: "GET",
+async: false,
+headers: { "Accept": "application/json;odata=verbose" },
+success: function(data){
+$scope.items = data.d.results;
+},
+error: function(sender,args){
+console.log(args.get_message());
+}
+});
+}
+
+</script>
+
+
+Example-2: Display SharePoint List Data in Tabular format using AngularJS in SharePoint Online
+
+<script src="https://sharepointskytraining.sharepoint.com/sites/TSInfo/Style Library/angular.min.js"></script>
+<script src="https://sharepointskytraining.sharepoint.com/sites/TSInfo/Style Library/jquery-2.0.3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+
+<div ng-app="myapp">
+<h1>Product Details</h1>
+<div ng-controller="MyController" class="ng-scope">
+<div ng-repeat="p in Products">
+<table style="background-color:#f07432">
+<tr><td align = "center"><b>Product Name: {{p.ProductName}}</b> </td></tr>
+<tr><td align = "center"><img ng-src={{p.ProductImage}} /> </td></tr>
+<tr><td align = "center"><b> Rate: USD. {{p.ProductRate}}</b></td></tr>
+</table>
+<hr />
+</div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+var appVar = angular.module('myapp', []);
+appVar.controller("MyController", function($scope){
+GetListItems($scope);
+});
+
+function GetListItems($scope)
+{ $scope.loadREST = function () {
+jQuery.ajax({
+url: "https://sharepointskytraining.sharepoint.com/sites/TSInfo/_api/web/lists/GetByTitle('product')/items",
+type: "GET",
+dataType: "json",
+async: "true",
+headers: { "Accept": "application/json;odata=verbose" },
+success: function (data) {
+var newData = [];
+jQuery.each(data.d.results, function(index,value) {
+
+newData.push({ProductName: value.ProductName, ProductRate: value.ProductRate, ProductImage: value.ProductImage.Url});
+});
+$scope.$apply(function(){
+$scope.Products = newData;
+});
+},
+error: function () {
+alert("error");
+}
+
+});
+
+};
+$scope.loadREST();
+}
+</script>
+
+
+Example-3:
+
+<h1>Customers</h1>
+<div ng-app="SharePointAngApp" class="row">
+<div ng-controller="spCustomerController" class="span10">
+<table class="table table-condensed table-hover">
+<tr>
+<th>Title</th>
+<th>Employee</th>
+<th>Company</th>
+</tr>
+<tr ng-repeat="customer in customers">
+<td>{{customer.Title}}</td>
+<td>{{customer.Employee}}</td>
+<td>{{customer.Company}}</td>
+</tr>
+</table>
+</div>
+</div>
+
+<style>
+
+table, td, th {
+
+border: 1px solid green;
+
+}
+
+th {
+
+background-color: green;
+
+color: white;
+
+}
+
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
+<script>
+var myAngApp = angular.module('SharePointAngApp', []);
+myAngApp.controller('spCustomerController', function ($scope, $http) {
+$http({
+method: 'GET',
+url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle('Customers')/items?$select=Title,Employee,Company",
+headers: { "Accept": "application/json;odata=verbose" }
+}).success(function (data, status, headers, config) {
+$scope.customers = data.d.results;
+}).error(function (data, status, headers, config) {
+});
+});
+
+</script>
+

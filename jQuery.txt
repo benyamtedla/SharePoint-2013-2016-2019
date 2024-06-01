@@ -1,0 +1,66 @@
+jQuery is a lightweight javascript library (write less, do more).
+
+To work with jQuery, we need to refer jQuery file.
+
+Download and refer the jQuery file:
+<script src="jquery-3.4.0.min.js"></script>
+
+Or, you can add jQuery file reference from CDN (Content Delivery Network).
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.0.min.js"></script>
+
+Syntax:
+$(selector).action()
+
+$("p").hide()
+
+Document Ready Event:
+
+$(document).ready(function(){
+//Code
+});
+
+Or you can write like this:
+
+$(function(){
+//Code
+});
+
+Button Click Event:
+The $(document).ready() method allows us to execute a function when the document is fully loaded.
+
+$(document).ready(function(){
+  $("#btnClick").click(function(){
+    callMethod();
+  });
+});
+
+Paragraph Click Event:
+
+$("p").click(function(){
+  // action goes here!!
+});
+
+Get/Set Values:
+
+var value = $("#test").text();
+var htmlvalue = $("#test").html();
+var value = $("#test").val();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,225 @@
+JavaScript is an easy to use programming language for HTML and web.
+
+In an HTML page, the scripts should be placed inside a <script> and </script> tags.
+
+<script>
+alert('Hello Welcome to the training.');
+</script>
+
+Scripts can be placed inside <body>, or in the <head> section of an HTML page, or in both.
+
+- Writing into an HTML element, using innerHTML.
+- Writing into the HTML output using document.write().
+- Writing into an alert box, using window.alert().
+- Writing into the browser console, using console.log()
+
+In an HTML page, the scripts should be placed inside a <script> and </script> tags.
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Let us start with HTML and JavaScript</h1>
+
+<p id="demo"></p>
+
+<script>
+document.getElementById("demo").innerHTML = "Welcome to the SharePoint training";
+</script>
+
+</body>
+</html>
+
+document.write ("Welcome to the SharePoint training");
+alert("Welcome to the SharePoint training");
+console.log("Welcome to the SharePoint training");
+
+JavaScript Comments:
+For single line comments can be started with //.
+
+Example: var x = 5; //This is a variable.
+
+Multi-line Comments: Any text between /* and */ will be treated as commented code.
+
+/*
+The below
+lines are
+test comments.
+*/
+
+var x=5;
+
+JavaScript Variable:
+
+JavaScript variables are containers for storing data values.
+Can be declared with var keyword like below:
+
+Example:
+var x=10;
+var firstname="Bijay";
+
+JavaScript variable names must be unique.
+JavaScript identifiers are case-sensitive.
+JavaScript variables can hold many data types like integers, strings etc.
+
+JavaScript Operators:
+We can performs all arithmetic operations on numbers like: +, -, *, **, /, %, ++, -- etc.
+
+JavaScript Comparision Operators:
+
+Operator	Description
+==	equal to
+===	equal value and equal type
+!=	not equal
+!==	not equal value or not equal type
+>	greater than
+<	less than
+>=	greater than or equal to
+<=	less than or equal to
+?	ternary operator
+
+JavaScript Functions:
+
+Code blocks to perform certain tasks.
+
+A JavaScript function is defined with the function keyword, followed by a name, followed by parentheses ().
+
+Functions can have parameters which can be included inside parentheses ().
+function DemoFunction()
+{
+alert ("Hello World");
+}
+
+function DemoFunction(firstname, lastname)
+{
+alert (firstname + " "+ lastname);
+}
+
+JavaScript Events:
+These are some things which will happen to HTML elements like buttons.	
+
+<button onclick="myMethod()">Click here</button>
+
+<button onclick="document.getElementById('demo').innerHTML = Date()">Click here</button>
+
+JavaScript String Functions:
+
+JavaScript provides lots of methods to work with strings.
+
+length:
+var mystring="This is my test string";
+var length=mystring.length;
+
+indexOf():
+var mystring="This is my test string";
+var position=mystring.indexOf("test");
+
+substring():
+
+var str = "Apple, Banana, Kiwi";
+var res = str.substring(7, 13);
+
+replace():
+
+var mainstring = "Please visit TSInfoTechnologies.com";
+var finalstring = mainstring.replace("TSInfoTechnologies.com", "SharePointSky.com");
+
+toUpperCase() and toLowerCase():
+
+var text1 = "Hello World!"; 
+var text2 = text1.toUpperCase();
+var text2 = text1.toLowerCase();
+
+JavaScript Arrays:
+An array is a special variable, which can hold more than one value at a time.
+
+var websites = ["EnjoySharePoint", "SharePointSky", "TSInfoTechnologies"];
+
+Or you can also declare like below:
+var websites = new Array("EnjoySharePoint", "SharePointSky", "TSInfoTechnologies");
+
+var firstwebsite = websites[0];
+
+If you want to bind to an html element in a div.
+document.getElementById("demo").innerHTML = websites[0];
+
+Array indexes start with 0.
+
+var x = websites.length; //Returns Array length
+
+websites.sort(); //Sort the array.
+
+Looping Array Elements:
+
+<p id="demo"></p>
+<script>
+var websites = ["EnjoySharePoint", "SharePointSky", "TSInfoTechnologies"];
+var details;
+
+details = "<ul>";
+for (i = 0; i < websites.length; i++) {
+  details += "<li>" + websites[i] + "</li>";
+}
+details += "</ul>";
+document.getElementById("demo").innerHTML = details;
+</script>
+
+JavaScript if else statement:
+
+if (condition) {
+}
+
+if (condition) {
+}
+else {
+}
+
+if (condition1) {
+
+} else if (condition2) {
+
+} else {
+
+}
+
+JavaScript Switch Statement:
+
+switch(expression) {
+  case x:
+    // code block
+    break;
+  case y:
+    // code block
+    break;
+  default:
+    // code block
+}
+
+JavaScript For Loop:
+
+var i,details;
+for (i = 0; i < websites.length; i++) { 
+  details += websites[i] + "<br>";
+}
+
+JavaScript While Loop:
+
+while (condition) {
+  // code block to be executed
+}
+
+JavaScript Do/While Loop:
+
+do {
+  // code block to be executed
+}
+while (condition);
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,93 @@
++++++++++++++++++++++++++
+
+<input type="button" id="btnClick" value="Create List using Rest API"/>
+<br/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script>
+$(function(){
+$("#btnClick").click(function(){
+
+ for(var i = 0 ; i < 5050; i++)
+      { 
+
+$.ajax  
+    ({  
+    url: _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getbytitle('LargeListRestAPI')/items",  
+    type: "POST",
+    async: false,
+    data: JSON.stringify  
+    ({  
+        __metadata:  
+        {  
+            type: "SP.Data.LargeListRestAPIListItem"  
+        },  
+        Title: 'Hello'
+    }),  
+    headers:  
+    {  
+        "Accept": "application/json;odata=verbose",  
+        "Content-Type": "application/json;odata=verbose",  
+        "X-RequestDigest": $("#__REQUESTDIGEST").val(),  
+        "X-HTTP-Method": "POST"  
+    },  
+    success: function(data, status, xhr)  
+    { 
+    console.log("success: ");
+    },  
+    error: function(xhr, status, error)  
+    {  
+        console.log("failed: "+i);
+    }  
+
+});
+
+}
+
+});
+});
+</script>
+
+
++++++++++++++++++++++++++++++++++
+
+<script type="text/javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<input type="button" value="Create" id="btncreate"></input>
+<script>
+$(document).ready(function () {
+$("#btncreate").click(function(){
+addItemToList();
+});
+});
+
+function addItemToList() {
+    var clientContext = new SP.ClientContext.get_current();
+    var oList = clientContext.get_web().get_lists().getByTitle('LargeListJavaScript');
+
+    var items = [];
+    var batchLimit = 100;
+
+    for (var i = 0; i < 6000; i++) {
+        var itemCreateInfo = new SP.ListItemCreationInformation();
+        var newItem = oList.addItem(itemCreateInfo);
+
+        newItem.set_item('Title', 'item-'+i);
+        newItem.update();
+        items[i] = newItem;
+        clientContext.load(items[i]);
+
+        if (i % batchLimit == 0) {           
+            clientContext.executeQueryAsync(Function.createDelegate(this, this.onQuerySucceeded), Function.createDelegate(this, this.onQueryFailed));
+            items = [];
+        }            
+    }
+}
+
+function onQuerySucceeded() {
+    console.log('Item created');
+}
+
+function onQueryFailed(sender, args) {
+    console.log('Request failed. ' + args.get_message() + '\n' + args.get_stackTrace());
+}
+
+</script>
