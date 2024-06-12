@@ -3,7 +3,7 @@ Create List:
 
  void CreateList()
         {
-            using (ClientContext ctx = new ClientContext("https://sharepointskytraining.sharepoint.com/sites/TSInfo/"))
+            using (ClientContext ctx = new ClientContext("https://8hnmqs.sharepoint.com/sites/Ethiopia/"))
             {
                 ctx.AuthenticationMode = ClientAuthenticationMode.Default;
                 ctx.Credentials = new SharePointOnlineCredentials("bijay@SharePointSkyTraining.onmicrosoft.com", GetSPOSecureStringPassword());
@@ -25,7 +25,7 @@ Create List:
 
         void AddColumnsToList()
         {
-            using (ClientContext ctx = new ClientContext("https://sharepointskytraining.sharepoint.com/sites/TSInfo/"))
+            using (ClientContext ctx = new ClientContext("https://8hnmqs.sharepoint.com/sites/Ethiopia/"))
             {
                 ctx.AuthenticationMode = ClientAuthenticationMode.Default;
                 ctx.Credentials = new SharePointOnlineCredentials("bijay@SharePointSkyTraining.onmicrosoft.com", GetSPOSecureStringPassword());
@@ -100,7 +100,7 @@ ClientContext clientContext = new ClientContext(siteUrl);
 
 void CreateSubSite()
 {
-using (ClientContext ctx = new ClientContext("https://onlysharepoint2013.sharepoint.com/sites/Rohit/"))
+using (ClientContext ctx = new ClientContext("https://8hnmqs.sharepoint.com/sites/Ethiopia/"))
 {
 ctx.AuthenticationMode = ClientAuthenticationMode.Default;
 ctx.Credentials = new SharePointOnlineCredentials("bijay@onlysharepoint2013.onmicrosoft.com", GetSPOSecureStringPassword());
@@ -137,7 +137,7 @@ throw;
 
 void BindList()
         {
-            using (ClientContext ctx = new ClientContext("https://onlysharepoint2013.sharepoint.com/sites/Rohit/"))
+            using (ClientContext ctx = new ClientContext("https://8hnmqs.sharepoint.com/sites/Ethiopia/"))
             {
                 ctx.AuthenticationMode = ClientAuthenticationMode.Default;
                 ctx.Credentials = new SharePointOnlineCredentials("preeti@onlysharepoint2013.onmicrosoft.com", GetSPOSecureStringPassword());
@@ -169,7 +169,7 @@ void BindList()
         {
             //string s = "hellp";
            // var requestUri = _spPageContextInfo.webAbsoluteUrl + "/_api/web/lists/getByTitle(" + "'" + s + "'"+")";
-            using (ClientContext ctx = new ClientContext("https://onlysharepoint2013.sharepoint.com/sites/Rohit/"))
+            using (ClientContext ctx = new ClientContext("https://8hnmqs.sharepoint.com/sites/Ethiopia/"))
             {
                 ctx.AuthenticationMode = ClientAuthenticationMode.Default;
                 ctx.Credentials = new SharePointOnlineCredentials("preeti@onlysharepoint2013.onmicrosoft.com", GetSPOSecureStringPassword());
@@ -211,22 +211,22 @@ Copy list items from One list to another list:
 public static void CopyItemsFromOneListToAnotherList()
 {
 
-using (ClientContext ctx = new ClientContext(ìhttps://onlysharepoint2013.sharepoint.com/sites/Bhawana/î))
+using (ClientContext ctx = new ClientContext(‚Äúhttps://8hnmqs.sharepoint.com/sites/Ethiopia/‚Äù))
 {
 ctx.AuthenticationMode = ClientAuthenticationMode.Default;
 ctx.Credentials = new SharePointOnlineCredentials(GetSPOAccountName(), GetSPOSecureStringPassword());
 ctx.Load(ctx.Web);
 ctx.ExecuteQuery();
 
-List sourceList= ctx.Web.Lists.GetByTitle(ìSourceListî);
+List sourceList= ctx.Web.Lists.GetByTitle(‚ÄúSourceList‚Äù);
 ctx.Load(sourceList);
 ctx.ExecuteQuery();
 
-List destList = ctx.Web.Lists.GetByTitle(ìDestinationListî);
+List destList = ctx.Web.Lists.GetByTitle(‚ÄúDestinationList‚Äù);
 ctx.Load(sourceList);
 ctx.ExecuteQuery();
 CamlQuery camlQuery = new CamlQuery();
-camlQuery.ViewXml = ì<View/>î;
+camlQuery.ViewXml = ‚Äú<View/>‚Äù;
 ListItemCollection listItems = sourceList.GetItems(camlQuery);
 
 ctx.Load(listItems);
@@ -236,9 +236,9 @@ foreach (ListItem item in listItems)
 {
 ListItemCreationInformation newItemInfo = new ListItemCreationInformation();
 ListItem newItem = destList.AddItem(newItemInfo);
-newItem[ìTitleî] = item[ìTitleî];
-newItem[ìEmailIDî] = item[ìEmailIDî];
-newItem[ìAddressî] = item[ìAddressî];
+newItem[‚ÄúTitle‚Äù] = item[‚ÄúTitle‚Äù];
+newItem[‚ÄúEmailID‚Äù] = item[‚ÄúEmailID‚Äù];
+newItem[‚ÄúAddress‚Äù] = item[‚ÄúAddress‚Äù];
 newItem.Update();
 }
 ctx.ExecuteQuery();
@@ -249,7 +249,7 @@ private static string GetSPOAccountName()
 {
 try
 {
-return ConfigurationManager.AppSettings[ìSPOAccountî];
+return ConfigurationManager.AppSettings[‚ÄúSPOAccount‚Äù];
 }
 catch
 {
@@ -261,7 +261,7 @@ private static SecureString GetSPOSecureStringPassword()
 try
 {
 var secureString = new SecureString();
-foreach (char c in ConfigurationManager.AppSettings[ìSPOPasswordî])
+foreach (char c in ConfigurationManager.AppSettings[‚ÄúSPOPassword‚Äù])
 {
 secureString.AppendChar(c);
 }
@@ -389,7 +389,7 @@ label1.Text = "Sub site created";
 //Create Workflow History List
 Create History List
 
-var siteURL = "https://onlysharepoint2013.sharepoint.com/sites/sptraining/";
+var siteURL = "https://8hnmqs.sharepoint.com/sites/Ethiopia/";
 using (ClientContext ctx = new ClientContext(siteURL))
 {
 ctx.AuthenticationMode = ClientAuthenticationMode.Default;
