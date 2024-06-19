@@ -1,0 +1,52 @@
+<style>
+.ms-core-listMenu-verticalBox UL.root > LI > .menu-item{ 
+font-weight:bold; 
+background-color:#0d9624; 
+color:#ffffff; 
+border-bottom-color:#41cc58; 
+border-bottom-style:solid; 
+border-bottom-width:1px; 
+min-height:25px; 
+padding-top:5px; 
+padding-left:10px; 
+font-size:12px; 
+font-family:Arial, Helvetica, Sans-Serif !important; 
+} 
+.ms-core-listMenu-verticalBox > ul.root > li.static > ul.static > li.static > a:hover { 
+color: #ffffff!important; 
+background-color:#f70419 !important; 
+text-decoration:none; 
+} 
+.ms-core-listMenu-verticalBox > ul.root > li.selected > a { 
+background-image:none; 
+background-color:#ff021b; 
+color:#ffffff !important; 
+} 
+.ms-core-listMenu-verticalBox > ul.root > li > a:hover { 
+background-image:none; 
+background-color:#f90212; 
+color:#ffffff !important; 
+text-decoration:underline; 
+} 
+.ms-core-listMenu-verticalBox > ul.root > li.static > ul.static > li > a { 
+font-size:12px; 
+padding-left:10px; 
+font-family:Arial, Helvetica, Sans-Serif !important; 
+} 
+.ms-core-listMenu-verticalBox > ul.root > li.static > ul.static > li > a.selected { 
+background:none; 
+color: #ef0212 !important; 
+background-color:#ffffff!important; 
+text-decoration: none; 
+border: 1px #fff solid; 
+font-weight:bold; 
+} 
+.ms-core-listMenu-verticalBox a.selected 
+{ 
+border: 1px #fff solid !important; 
+} 
+.ms-core-listMenu-verticalBox UL.root UL 
+{ 
+margin:0px 0px 10px 0px !important; 
+}
+</style>
